@@ -1,0 +1,5 @@
+{ "type": "FeatureCollection", "features": [
+  { "type": "Feature", "properties": { "id": 1, "name": "Kigali" }, "geometry": { "type": "Point", "coordinates": [30.0626, -1.9441] } },
+  { "type": "Feature", "properties": { "id": 2, "name": "Northern" }, "geometry": { "type": "Point", "coordinates": [29.73, -1.25] } },
+  { "type": "Feature", "properties": { "id": 3, "name": "Southern" }, "geometry": { "type": "Point", "coordinates": [29.7, -2.45] } }
+]}

@@ -1,0 +1,93 @@
+* { box-sizing: border-box; }
+:root{
+	--bg:#f6f9fb; --card:#ffffff; --muted:#6b7280; --accent:#10b981; --danger:#ef4444; --soft:#eef2f7;
+}
+body { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin: 0; padding: 0; color: #0f172a; background: var(--bg); }
+.app-shell{display:flex;min-height:100vh}
+/* Make the sidebar fixed so it stays visible while scrolling */
+.sidebar{width:220px;background:#1d8c2a;color:white;padding:20px;display:flex;flex-direction:column;gap:16px;position:fixed;left:0;top:0;bottom:0;z-index:1000;pointer-events:auto}
+.brand{font-weight:700;font-size:18px}
+.nav-item{padding:8px 10px;border-radius:6px;color:#cbd5e1;display:block;text-decoration:none;cursor:pointer;pointer-events:auto}
+.nav-item.active{background:#1fa70d;color:#fff}
+.user{margin-top:auto;font-size:13px;color:#94a3b8}
+.main-area{flex:1;display:flex;flex-direction:column;margin-left:215px}
+/* Fix the topbar to the top of the main area so filters stay visible */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);position:fixed;left:220px;right:0;top:0;z-index:30;border-bottom:1px solid #e6eef6}
+.topbar h1{margin:0;font-size:20px}
+.top-controls{display:flex;gap:12px;align-items:center}
+.btn{background:var(--accent);border:none;color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer}
+.small input{width:64px}
+
+/* Location filter selects in topbar */
+#locationFilters{display:flex;gap:8px;align-items:center}
+#locationFilters select{padding:6px 8px;border-radius:6px;border:1px solid #e6eef6;background:#fff;color:#0f172a}
+.cards{display:block;margin-top:72px;padding:20px;padding-bottom:80px}
+.card{background:var(--card);border-radius:10px;padding:12px;box-shadow:0 1px 4px rgba(2,6,23,0.06)}
+.stat{display:flex;flex-direction:column;justify-content:center}
+.stat-title{font-size:13px;color:var(--muted)}
+.stat-value{font-size:28px;font-weight:700;margin-top:6px}
+.stat-note{font-size:12px;color:var(--muted);margin-top:6px}
+.chart-card canvas{height:300px!important;}
+.chart-card{overflow: auto;margin-top: 30px !important;}
+
+
+/* Toggle container for chart controls */
+.chart-toggle{display:flex;gap:8px;margin-bottom:8px;align-items:center;margin: 30px;}
+.btn.secondary{background:#6b7280}
+.alerts-card{grid-column:span 2}
+.alerts-card ul{list-style:none;padding:0;margin:0}
+.alerts-card li{padding:10px;border-radius:8px;margin-bottom:8px;display:flex;flex-direction:column}
+.alert-high{background:#fff1f0;border:1px solid #ffd6d6}
+.alert-medium{background:#fff7ed;border:1px solid #ffe6bf}
+.alert-low{background:#f0fdf4;border:1px solid #d1fae5}
+.map-section{display:grid;grid-template-columns:2fr 1fr;gap:16px;padding:16px;margin-top:8px}
+.map-card{height:420px}
+
+/* canvas{height: 300px !important;} */
+
+#map{height:100%;border-radius:8px}
+/* Make map features show pointer and highlight on hover */
+.leaflet-interactive { cursor: pointer; }
+.district-highlight { stroke: #ff9900; stroke-width: 2px; fill-opacity: 0.25 !important; }
+
+/* Ensure map panes receive pointer events; defensive in case other layout layers overlap */
+#map, #map * { pointer-events: auto; }
+
+/* Legend and color picker near the map */
+.map-legend{position:relative;margin-top:8px;display:flex;align-items:center;gap:8px;font-size:13px;color:#374151}
+.map-legend input[type="color"]{width:36px;height:28px;padding:0;border:1px solid #e5e7eb;border-radius:4px}
+.map-legend .legend-note{font-size:12px;color:#6b7280;margin-left:12px}
+.details-card{height:420px;overflow:auto}
+.footer{padding:16px;text-align:center;color:var(--muted);margin-top: 15px !important;}
+.hidden{display:none !important;}
+
+/* Sidebar nav active styling */
+.nav-item.active{background:#1fa70d;color:#fff}
+
+/* Settings dialog */
+.settings-dialog{position:fixed;right:24px;top:84px;z-index:70;width:320px;box-shadow:0 6px 24px rgba(2,6,23,0.12);border-radius:8px}
+.settings-dialog .settings-body{padding:12px;display:flex;flex-direction:column;gap:10px}
+.settings-dialog input[type="number"]{width:80px}
+.settings-dialog input[type="color"]{width:40px;height:28px;padding:0;border:1px solid #e5e7eb;border-radius:4px}
+
+/* Card visibility helper */
+.card.hidden-card{display:none !important;}
+
+.settings-actions{margin-top:12px;display:flex;gap:8px}
+
+/* hidden compatibility input should take no space */
+#intervalInput[type="hidden"]{display:none}
+
+/* Smooth show/hide transitions for cards */
+.card{transition:transform 180ms ease,opacity 180ms ease}
+.card.inactive{opacity:0.0;transform:translateY(6px);pointer-events:none}
+@media (max-width:1100px){
+	/* On smaller screens keep the sidebar static and topbar in-flow */
+	.sidebar{position:relative;width:100%;height:auto}
+	.main-area{margin-left:0}
+	.topbar{position:relative;left:0;right:0;top:0;border-bottom:none}
+	.cards{margin-top:0}
+	/* .cards{grid-template-columns:repeat(2,1fr)}
+	.alerts-card{grid-column:span 2}
+	.map-section{grid-template-columns:1fr} */
+}

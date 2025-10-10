@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rwanda Climate Resilience Dashboard</title>
+    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="" crossorigin="" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">Rwanda Climate</div>
+        <nav>
+          <a id="nav-overview" class="nav-item active">Overview</a>
+          <a id="nav-districts" class="nav-item">Districts</a>
+          <a id="nav-alerts" class="nav-item">Alerts</a>
+          <a id="nav-settings" class="nav-item">Settings</a>
+        </nav>
+        <div class="user">Admin</div>
+      </aside>
+
+      <div class="main-area">
+        <header class="topbar">
+          <h1>Rwanda Climate Resilience</h1>
+          <div class="top-controls">
+            <span id="status">Initializing...</span>
+            <div id="locationFilters">
+              <select id="provinceSelect" title="Select province">
+                <option value="">Province</option>
+              </select>
+              <select id="districtSelect" title="Select district">
+                <option value="">District</option>
+              </select>
+            </div>
+            <button id="refreshBtn" class="btn">Fetch Now</button>
+            <!-- poll control moved to Settings; keep a hidden interval input for compatibility -->
+            <input id="intervalInput" type="hidden" value="30" />
+          </div>
+        </header>
+
+        <section class="cards">
+          <div class="card stat">
+            <div class="stat-title">Overall Risk</div>
+            <div class="stat-value" id="overallRisk">—</div>
+            <div class="stat-note">Based on latest district alerts</div>
+          </div>
+          <div class="chart-toggle">
+            <button id="useMyLocationBtn" class="btn">Use my location</button>
+            <button id="useSelectedDistrictBtn" class="btn secondary">Use selected district</button>
+          </div>
+          <div class="card chart-card">
+            <div class="card-title">Rainfall (24h)</div>
+            <canvas id="rainChart" class="chart-large"></canvas>
+          </div>
+          <div class="card chart-card">
+            <div class="card-title">Temperature (24h avg)</div>
+            <canvas id="tempChart" class="chart-large"></canvas>
+          </div>
+          <div class="card alerts-card">
+            <div class="card-title">Recent Alerts</div>
+            <ul id="alertsList"></ul>
+          </div>
+        </section>
+
+        <section class="map-section">
+          <div class="card map-card">
+            <div class="card-title">District Map</div>
+            <div id="map"></div>
+            <div class="map-legend" id="mapLegend">
+              <label for="highlightColor">Selected district color:</label>
+              <input type="color" id="highlightColor" value="#ff0000" title="Choose highlight color" />
+              <div class="legend-note">Click a district to select it. Selected district is highlighted.</div>
+            </div>
+          </div>
+          <div class="card details-card">
+            <div class="card-title">District Details</div>
+            <div id="districtDetails">Select a district on the map to see recent data.</div>
+          </div>
+        </section>
+
+        <footer class="footer">Data source: Open-Meteo · Storage: Supabase</footer>
+        <!-- Settings dialog (hidden by default) -->
+        <div id="settingsDialog" class="card settings-dialog hidden" role="dialog" aria-hidden="true">
+          <div class="card-title">Settings</div>
+          <div class="settings-body">
+            <label>Poll interval (mins): <input id="settingsPollInput" type="number" value="30" min="1" /></label>
+            <div>
+              <label for="settingsHighlightColor">Highlight color:</label>
+              <input type="color" id="settingsHighlightColor" value="#ff0000" />
+            </div>
+            <div>
+              <label>Visible cards:</label>
+              <div><label><input type="checkbox" data-card="chart-card" checked /> Charts</label></div>
+              <div><label><input type="checkbox" data-card="map-card" checked /> Map</label></div>
+              <div><label><input type="checkbox" data-card="details-card" checked /> Details</label></div>
+              <div><label><input type="checkbox" data-card="alerts-card" checked /> Alerts</label></div>
+            </div>
+            <div class="settings-actions">
+              <button id="saveSettingsBtn" class="btn">Save</button>
+              <button id="closeSettingsBtn" class="btn secondary">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <small>Data source: Open-Meteo · Storage: Supabase</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="assets/config.js"></script>
+    <script src="assets/main.js"></script>
+  </body>
+</html>
