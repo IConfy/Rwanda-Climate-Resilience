@@ -34,7 +34,7 @@ body { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvet
 /* Toggle container for chart controls */
 .chart-toggle{display:flex;gap:8px;margin-bottom:8px;align-items:center;margin: 30px;}
 .btn.secondary{background:#6b7280}
-.alerts-card{grid-column:span 2}
+.alerts-card{margin-top: 30px !important; grid-column:span 2}
 .alerts-card ul{list-style:none;padding:0;margin:0}
 .alerts-card li{padding:10px;border-radius:8px;margin-bottom:8px;display:flex;flex-direction:column}
 .alert-high{background:#fff1f0;border:1px solid #ffd6d6}
