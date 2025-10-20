@@ -32,7 +32,7 @@ To get a local copy up and running, follow these simple steps.
 
 1.  **Clone the repo**
     ```sh
-    git clone https://github.com/your_username_/NISR_Hackaton2025.git
+    git clone https://github.com/IConfy/Rwanda-Climate-Resilience.git
     ```
 2.  **Configure Supabase**
     Open `assets/config.js` and add your Supabase Project URL and Anon Key:
